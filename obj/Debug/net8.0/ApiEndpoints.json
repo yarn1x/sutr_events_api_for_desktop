@@ -1,0 +1,286 @@
+[
+  {
+    "ContainingType": "college_events_admin_API.Controllers.ControllerAuthorization",
+    "Method": "Login",
+    "RelativePath": "college/admin/auth/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "college_events_admin_API.Controllers.LoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "college_events_admin_API.Controllers.ControllerEvents",
+    "Method": "GETEventList",
+    "RelativePath": "college/admin/events",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "college_events_admin_API.Controllers.ControllerEvents",
+    "Method": "GETEventGroups",
+    "RelativePath": "college/admin/events/{EventId}/groups",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "EventId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "college_events_admin_API.Controllers.ControllerEvents",
+    "Method": "PUTEventStatus",
+    "RelativePath": "college/admin/events/{EventId}/status/{StatusId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "EventId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "StatusId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "college_events_admin_API.Controllers.ControllerEvents",
+    "Method": "GETCategoryList",
+    "RelativePath": "college/admin/events/categories",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "college_events_admin_API.Controllers.ControllerEvents",
+    "Method": "POSTEventGroups",
+    "RelativePath": "college/admin/events/create/{EventId}/groups",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "EventId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "groups",
+        "Type": "System.Collections.Generic.List\u00601[[college_events_admin_API.Models.Data_transfer_objects.EventGroupPost, college_events_admin_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "college_events_admin_API.Controllers.ControllerEvents",
+    "Method": "PUTUpdateFullEvent",
+    "RelativePath": "college/admin/events/update/{EventId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "EventId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "college_events_admin_API.Models.Data_transfer_objects.EventUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "college_events_admin_API.Controllers.ControllerEvents",
+    "Method": "PUTEventGroups",
+    "RelativePath": "college/admin/events/update/{EventId}/groups",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "EventId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "groups",
+        "Type": "System.Collections.Generic.List\u00601[[college_events_admin_API.Models.Data_transfer_objects.EventGroupPost, college_events_admin_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "college_events_admin_API.Controllers.ControllerGroups",
+    "Method": "GETGroupList",
+    "RelativePath": "college/admin/groups",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "college_events_admin_API.Controllers.ControllerGroups",
+    "Method": "GETGroupEventsOnlyStatistic",
+    "RelativePath": "college/admin/groups/{GroupID}/statistic",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "GroupID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "college_events_admin_API.Controllers.ControllerOrganizers",
+    "Method": "GETOrganizersList",
+    "RelativePath": "college/admin/organizers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "college_events_admin_API.Controllers.ControllerLocations",
+    "Method": "GETPlaceList",
+    "RelativePath": "college/admin/places",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[college_events_admin_API.Models.Location, college_events_admin_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "college_events_admin_API.Controllers.ControllerLocations",
+    "Method": "POSTPlace",
+    "RelativePath": "college/admin/places/place",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newLocation",
+        "Type": "college_events_admin_API.Models.Data_transfer_objects.LocationPostDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "college_events_admin_API.Models.Location",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "college_events_admin_API.Controllers.ControllerLocations",
+    "Method": "DELETEPlace",
+    "RelativePath": "college/admin/places/place",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "locationId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "college_events_admin_API.Models.Location",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "college_events_admin_API.Controllers.ControllerSupervisors",
+    "Method": "GETSupervisorList",
+    "RelativePath": "college/admin/supervisors",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "college_events_admin_API.Controllers.ControllerUsers",
+    "Method": "GETRolesList",
+    "RelativePath": "college/admin/users/roles",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]

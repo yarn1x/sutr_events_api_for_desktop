@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\college_events_admin.props" />
+</Project>
