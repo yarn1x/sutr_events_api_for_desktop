@@ -3,7 +3,9 @@ using college_events_admin_API.Models.Data_transfer_objects;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 namespace college_events_admin_API.Controllers
 {
@@ -165,7 +167,9 @@ namespace college_events_admin_API.Controllers
 
 				// далее идут сами методы внесения изменений
 				if (groupsToDelete.Any())
+				{
 					_db.EventGroups.RemoveRange(groupsToDelete);
+				}
 
 				if (groupsToAdd.Any())
 				{
@@ -180,17 +184,20 @@ namespace college_events_admin_API.Controllers
 					_db.EventGroups.AddRange(newGroups);
 				}
 
-				foreach (var updateGroup in groupsToUpdate)
-				{
-					
-					var existing = existingGroups.First(e => e.EventGroupId == updateGroup.EventGroupId);
-					existing.GroupId = updateGroup.GroupId;
-					existing.ExpectedListenersCount = updateGroup.ExpectedListenersCount;
-					existing.ExpectedParticipantsCount = updateGroup.ExpectedParticipantsCount;
-					existing.ExpectedSuperParticipantsCount = updateGroup.ExpectedSuperParticipantsCount;
-				}
+                var existingGroupsDict = existingGroups.ToDictionary(e => e.EventGroupId);
 
-				_db.SaveChanges();
+                foreach (var updateGroup in groupsToUpdate)
+                {
+                    if (existingGroupsDict.TryGetValue(updateGroup.EventGroupId, out var existing))
+                    {
+                        existing.GroupId = updateGroup.GroupId;
+                        existing.ExpectedListenersCount = updateGroup.ExpectedListenersCount;
+                        existing.ExpectedParticipantsCount = updateGroup.ExpectedParticipantsCount;
+                        existing.ExpectedSuperParticipantsCount = updateGroup.ExpectedSuperParticipantsCount;
+                    }
+                }
+
+                _db.SaveChanges();
 				transaction.Commit();
 
 				return Ok();
@@ -331,5 +338,80 @@ namespace college_events_admin_API.Controllers
 				return BadRequest(ex);
 			}
 		}
+
+
+
+
+
+		[HttpPut("{EventId}/statistics")]
+		public async Task<ActionResult> PUTUpdateEventGroupsStatistic(int EventId, [FromBody] List<ActualAttendanceUpdateDto> body)
+		{
+            using IDbContextTransaction? transaction = _db.Database.BeginTransaction();
+
+            try
+            {
+                // получаем существующие группы для этого события
+                List<ActualAttendance>? existingGroups = await _db.ActualAttendances
+                    .Where(g => g.EventGroup.EventId == EventId)
+                    .ToListAsync();
+
+
+
+				List<ActualAttendance>? groupsToDelete = existingGroups
+					.Where(e => !body.Any(g => g.EventGroupId == e.EventGroupId))
+					.ToList();
+				
+				if (groupsToDelete.Any())
+				{
+					_db.ActualAttendances.RemoveRange(groupsToDelete);
+				}
+
+                List<ActualAttendanceUpdateDto>? groupsToCreate = body
+					.Where(e => !existingGroups.Any(g => g.EventGroupId == e.EventGroupId))
+					.ToList();
+
+				if (groupsToCreate.Any())
+				{
+					IEnumerable<ActualAttendance>? newGroups = groupsToCreate.Select(dto => new ActualAttendance()
+					{
+						EventGroupId = dto.EventGroupId,
+						ActualListenersCount = dto.ActualListenersCount,
+						ActualParticipantsCount = dto.ActualParticipantsCount,
+						ActualSuperParticipantsCount = dto.ActualSuperParticipantsCount,
+						TotalScore = dto.TotalScore,
+					});
+					_db.ActualAttendances.AddRange(newGroups);
+				}
+
+                List<ActualAttendanceUpdateDto>? groupsToUpdate = body
+					.Where(e => existingGroups.Any(g => g.EventGroupId == e.EventGroupId))
+					.ToList();
+
+                var existingGroupsDict = existingGroups.ToDictionary(e => e.EventGroupId);
+
+                foreach (var updateGroup in groupsToUpdate)
+                {
+                    if (existingGroupsDict.TryGetValue(updateGroup.EventGroupId, out var existing))
+                    {
+                        existing.EventGroupId = updateGroup.EventGroupId;
+                        existing.ActualListenersCount = updateGroup.ActualListenersCount;
+                        existing.ActualParticipantsCount = updateGroup.ActualParticipantsCount;
+                        existing.ActualSuperParticipantsCount = updateGroup.ActualSuperParticipantsCount;
+						existing.TotalScore = updateGroup.TotalScore;
+                    }
+                }
+
+
+                _db.SaveChanges();
+				transaction.Commit();
+
+				return NoContent();
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+				return Problem(ex.ToString(), null, 400, "Error updating groups");
+            }
+        }
 	}
 }

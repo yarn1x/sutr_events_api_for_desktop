@@ -410,3 +410,4 @@ C:\Desktop\Prog\СИстемный прогер\college_events_admin_API_copy\ob
 C:\Desktop\Prog\СИстемный прогер\college_events_admin_API_copy\obj\Debug\net8.0\college_.B0C54381.Up2Date
 C:\Desktop\Prog\СИстемный прогер\college_events_admin_API_copy\obj\Debug\net8.0\college_events_admin_API.genruntimeconfig.cache
 C:\Desktop\Prog\СИстемный прогер\college_events_admin_API_copy\obj\Debug\net8.0\ref\college_events_admin_API.dll
+C:\Desktop\Prog\СИстемный прогер\college_events_admin_API\obj\Debug\net8.0\college_events_admin_API.sourcelink.json

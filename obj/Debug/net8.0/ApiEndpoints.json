@@ -43,6 +43,27 @@
   },
   {
     "ContainingType": "college_events_admin_API.Controllers.ControllerEvents",
+    "Method": "PUTUpdateEventGroupsStatistic",
+    "RelativePath": "college/admin/events/{EventId}/statistics",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "EventId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "body",
+        "Type": "System.Collections.Generic.List\u00601[[college_events_admin_API.Models.Data_transfer_objects.ActualAttendanceUpdateDto, college_events_admin_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "college_events_admin_API.Controllers.ControllerEvents",
     "Method": "PUTEventStatus",
     "RelativePath": "college/admin/events/{EventId}/status/{StatusId}",
     "HttpMethod": "PUT",
