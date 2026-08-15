@@ -43,7 +43,23 @@
   },
   {
     "ContainingType": "college_events_admin_API.Controllers.ControllerEvents",
-    "Method": "PUTUpdateEventGroupsStatistic",
+    "Method": "GETEventGroupsStatistics",
+    "RelativePath": "college/admin/events/{EventId}/statistics",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "EventId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "college_events_admin_API.Controllers.ControllerEvents",
+    "Method": "PUTUpdateEventGroupsStatistics",
     "RelativePath": "college/admin/events/{EventId}/statistics",
     "HttpMethod": "PUT",
     "IsController": true,
@@ -91,27 +107,6 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "college_events_admin_API.Controllers.ControllerEvents",
-    "Method": "POSTEventGroups",
-    "RelativePath": "college/admin/events/create/{EventId}/groups",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "EventId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "groups",
-        "Type": "System.Collections.Generic.List\u00601[[college_events_admin_API.Models.Data_transfer_objects.EventGroupPost, college_events_admin_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "IsRequired": true
-      }
-    ],
     "ReturnTypes": []
   },
   {

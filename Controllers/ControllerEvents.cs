@@ -106,37 +106,6 @@ namespace college_events_admin_API.Controllers
 
 
 
-
-		[HttpPost("create/{EventId}/groups")] // эндпоинт, на момент написания этого комментария нигде не применяется (10.08.2026)
-		public ActionResult POSTEventGroups(int EventId, [FromBody] List<EventGroupPost> groups)
-		{
-			try
-			{
-				var eventGroups = groups.Select(dto => new EventGroup
-				{
-					EventId = EventId,
-					GroupId = dto.GroupId,
-					ExpectedListenersCount = dto.ExpectedListenersCount,
-					ExpectedParticipantsCount = dto.ExpectedParticipantsCount,
-					ExpectedSuperParticipantsCount = dto.ExpectedSuperParticipantsCount,
-				});
-				_db.EventGroups.AddRange(eventGroups);
-				_db.SaveChanges();
-			}
-			catch (Exception ex)
-			{
-				return Problem(ex.Message, null, 400, "Error posting groups");
-			}
-			return Created();
-		}
-        // он попросту не нужен, так как выполняет роль добавления группы к мероприятию.
-        // этот функционал и ещё удаление, изменение за один раз решает метод PUTEventGroups
-		// но я решил его тут оставить по приколу, зря что ли писал?
-
-
-
-
-
         [HttpPut("update/{EventId}/groups")]
 		public ActionResult<bool> PUTEventGroups(int EventId, [FromBody] List<EventGroupPost> groups)
 		{
@@ -230,6 +199,8 @@ namespace college_events_admin_API.Controllers
                 eventToUpdate.Title = dto.Event.Title;
                 eventToUpdate.CategoryId = dto.Event.CategoryId;
                 eventToUpdate.OrganizerId = dto.Event.OrganizerId;
+				eventToUpdate.MaxListenersCount = dto.Event.MaxListenersCount;
+				eventToUpdate.MaxParticipantsCount = dto.Event.MaxParticipantsCount;
 				eventToUpdate.OrganizerOrganization = dto.Event.OrganizerOrganization;
 				eventToUpdate.OrganizerPosition = dto.Event.OrganizerPosition;
                 eventToUpdate.ShortDescription = dto.Event.ShortDescription;
@@ -288,13 +259,17 @@ namespace college_events_admin_API.Controllers
                     _db.EventGroups.AddRange(newGroups);
                 }
 
+                var existingGroupsDict = existingGroups.ToDictionary(e => e.EventGroupId);
+
                 foreach (var updateGroup in groupsToUpdate)
                 {
-                    var existing = existingGroups.First(e => e.EventGroupId == updateGroup.EventGroupId);
-                    existing.GroupId = updateGroup.GroupId;
-                    existing.ExpectedListenersCount = updateGroup.ExpectedListenersCount;
-                    existing.ExpectedParticipantsCount = updateGroup.ExpectedParticipantsCount;
-                    existing.ExpectedSuperParticipantsCount = updateGroup.ExpectedSuperParticipantsCount;
+                    if (existingGroupsDict.TryGetValue(updateGroup.EventGroupId, out var existing))
+                    {
+                        existing.GroupId = updateGroup.GroupId;
+                        existing.ExpectedListenersCount = updateGroup.ExpectedListenersCount;
+                        existing.ExpectedParticipantsCount = updateGroup.ExpectedParticipantsCount;
+                        existing.ExpectedSuperParticipantsCount = updateGroup.ExpectedSuperParticipantsCount;
+                    }
                 }
 
                 //СОХРАНЯЕМ ВСЁ В ОДНОЙ ТРАНЗАКЦИИ
@@ -342,9 +317,33 @@ namespace college_events_admin_API.Controllers
 
 
 
+		[HttpGet("{EventId}/statistics")]
+		public async Task<ActionResult> GETEventGroupsStatistics(int EventId)
+		{
+			var a = await _db.ActualAttendances
+				.Where(a => a.EventGroup.EventId == EventId)
+				.Select(a => new
+				{
+					a.ActualAttendanceId,
+					a.EventGroupId,
+					a.ActualListenersCount,
+					a.ActualParticipantsCount,
+					a.ActualSuperParticipantsCount,
+					a.TotalScore,
+
+					a.EventGroup.Group.GroupId,
+					a.EventGroup.Group.Name,
+				})
+				.ToListAsync();
+
+			return Ok(a);
+		}
+
+
+
 
 		[HttpPut("{EventId}/statistics")]
-		public async Task<ActionResult> PUTUpdateEventGroupsStatistic(int EventId, [FromBody] List<ActualAttendanceUpdateDto> body)
+		public async Task<ActionResult> PUTUpdateEventGroupsStatistics(int EventId, [FromBody] List<ActualAttendanceUpdateDto> body)
 		{
             using IDbContextTransaction? transaction = _db.Database.BeginTransaction();
 
@@ -356,20 +355,18 @@ namespace college_events_admin_API.Controllers
                     .ToListAsync();
 
 
-
 				List<ActualAttendance>? groupsToDelete = existingGroups
 					.Where(e => !body.Any(g => g.EventGroupId == e.EventGroupId))
 					.ToList();
-				
 				if (groupsToDelete.Any())
 				{
 					_db.ActualAttendances.RemoveRange(groupsToDelete);
 				}
 
+
                 List<ActualAttendanceUpdateDto>? groupsToCreate = body
 					.Where(e => !existingGroups.Any(g => g.EventGroupId == e.EventGroupId))
 					.ToList();
-
 				if (groupsToCreate.Any())
 				{
 					IEnumerable<ActualAttendance>? newGroups = groupsToCreate.Select(dto => new ActualAttendance()
@@ -383,12 +380,11 @@ namespace college_events_admin_API.Controllers
 					_db.ActualAttendances.AddRange(newGroups);
 				}
 
+
                 List<ActualAttendanceUpdateDto>? groupsToUpdate = body
 					.Where(e => existingGroups.Any(g => g.EventGroupId == e.EventGroupId))
 					.ToList();
-
                 var existingGroupsDict = existingGroups.ToDictionary(e => e.EventGroupId);
-
                 foreach (var updateGroup in groupsToUpdate)
                 {
                     if (existingGroupsDict.TryGetValue(updateGroup.EventGroupId, out var existing))
