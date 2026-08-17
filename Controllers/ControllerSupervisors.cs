@@ -19,9 +19,10 @@ namespace college_events_admin_API.Controllers
             {
                 u.UserTypeId,
                 u.AuthorizedUser.UserId,
+                //НЕ МЕНЯТЬ ИМЕНА ПОЛЕЙ. ЧЕРЕВАТО НЕИЗВЕСТНЫМИ ОШИБКАМИ
                 u.AuthorizedUser.User.FirstName,
-                u.AuthorizedUser.User.LastName,
-                u.AuthorizedUser.User.MiddleName,
+                SurName = u.AuthorizedUser.User.LastName,
+                LastName = u.AuthorizedUser.User.MiddleName,
                 u.AuthorizedUser.Email,
                 u.AuthorizedUser.Phone,
                 groups = _db.Groups.Select(g => new

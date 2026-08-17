@@ -19,9 +19,10 @@ namespace college_events_admin_API.Controllers
             {
                 g.GroupId,
                 GroupName = g.Name,
+                //НЕ МЕНЯТЬ ИМЕНА ПОЛЕЙ. ЧЕРЕВАТО НЕИЗВЕСТНЫМИ ОШИБКАМИ
                 SupervisorName = g.AuthorizedUser.User.FirstName,
                 SupervisorSurname = g.AuthorizedUser.User.LastName,
-                SupervisorMiddlename = g.AuthorizedUser.User.MiddleName,
+                SupervisorLastname = g.AuthorizedUser.User.MiddleName,
                 SupervisorEmail = g.AuthorizedUser.Email,
                 SupervisorPhone = g.AuthorizedUser.Phone,
                 eventsCount = _db.ActualAttendances.Select(a => new

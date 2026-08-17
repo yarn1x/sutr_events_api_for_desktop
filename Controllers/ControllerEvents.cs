@@ -43,7 +43,8 @@ namespace college_events_admin_API.Controllers
 					e.StatusId,
                     StatusName = e.Status.Name,
 
-					OrganizerName = e.Organizer.User.FirstName,
+                    //НЕ МЕНЯТЬ ИМЕНА ПОЛЕЙ. ЧЕРЕВАТО НЕИЗВЕСТНЫМИ ОШИБКАМИ
+                    OrganizerName = e.Organizer.User.FirstName,
 					OrganizerSurname = e.Organizer.User.LastName,
 					OrganizerLastname = e.Organizer.User.MiddleName,
 					e.OrganizerOrganization,
@@ -332,8 +333,13 @@ namespace college_events_admin_API.Controllers
 					a.TotalScore,
 
 					a.EventGroup.Group.GroupId,
-					a.EventGroup.Group.Name,
-				})
+					groupName = a.EventGroup.Group.Name,
+
+					supervisorName = a.EventGroup.Group.AuthorizedUser.User.FirstName,
+					supervisorSurname = a.EventGroup.Group.AuthorizedUser.User.LastName,
+                    supervisorLastname = a.EventGroup.Group.AuthorizedUser.User.MiddleName,
+
+                })
 				.ToListAsync();
 
 			return Ok(a);

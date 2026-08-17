@@ -17,9 +17,10 @@ namespace college_events_admin_API.Controllers
             var arr = _db.UserUsertypes.Select(u => new
             {
                 u.AuthorizedUser.UserId,
+                //НЕ МЕНЯТЬ ИМЕНА ПОЛЕЙ. ЧЕРЕВАТО НЕИЗВЕСТНЫМИ ОШИБКАМИ
                 u.AuthorizedUser.User.FirstName,
-                u.AuthorizedUser.User.LastName,
-                u.AuthorizedUser.User.MiddleName,
+                SurName = u.AuthorizedUser.User.LastName,
+                LastName = u.AuthorizedUser.User.MiddleName,
                 u.UserTypeId,
                 u.UserType.TypeName,
                 u.AuthorizedUser.Email,
