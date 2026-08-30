@@ -2,6 +2,8 @@
 {
     public class ActualAttendanceUpdateDto
     {
+        public int ActualAttendanceId { get; set; }
+
         public int EventGroupId { get; set; }
 
         public int ActualListenersCount { get; set; }

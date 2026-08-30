@@ -192,32 +192,48 @@ namespace college_events_admin_API.Controllers
                 //ОБНОВЛЯЕМ ОСНОВНУЮ ИНФОРМАЦИЮ
                 var eventToUpdate = _db.Events.FirstOrDefault(e => e.EventId == EventId);
                 if (eventToUpdate == null)
-				{
+                {
                     return NotFound($"Мероприятие ID={EventId} не найдено");
-				}
+                }
 
                 //обновляем поля мероприятия
                 eventToUpdate.Title = dto.Event.Title;
                 eventToUpdate.CategoryId = dto.Event.CategoryId;
                 eventToUpdate.OrganizerId = dto.Event.OrganizerId;
-				eventToUpdate.MaxListenersCount = dto.Event.MaxListenersCount;
-				eventToUpdate.MaxParticipantsCount = dto.Event.MaxParticipantsCount;
-				eventToUpdate.OrganizerOrganization = dto.Event.OrganizerOrganization;
-				eventToUpdate.OrganizerPosition = dto.Event.OrganizerPosition;
+                eventToUpdate.MaxListenersCount = dto.Event.MaxListenersCount;
+                eventToUpdate.MaxParticipantsCount = dto.Event.MaxParticipantsCount;
+                eventToUpdate.OrganizerOrganization = dto.Event.OrganizerOrganization;
+                eventToUpdate.OrganizerPosition = dto.Event.OrganizerPosition;
                 eventToUpdate.ShortDescription = dto.Event.ShortDescription;
                 eventToUpdate.FullDescription = dto.Event.FullDescription;
                 eventToUpdate.AdditionalInfo = dto.Event.AdditionalInfo;
-				eventToUpdate.StartDatetime = dto.Event.StartDateTime;
-				eventToUpdate.EndDatetime = dto.Event.EndDateTime;
+                eventToUpdate.StartDatetime = dto.Event.StartDateTime;
+                eventToUpdate.EndDatetime = dto.Event.EndDateTime;
 
 
-                //ОБНОВЛЯЕМ ЛОКАЦИИ (полная замена)
-                var existingLocations = _db.EventLocations.Where(el => el.EventId == EventId);
-                _db.EventLocations.RemoveRange(existingLocations);
+                
+                var existingLocationIds = _db.EventLocations
+					.Where(el => el.EventId == EventId)
+					.Select(el => el.LocationId)
+					.ToList();
 
-                if (dto.Event.EventLocationsIds != null && dto.Event.EventLocationsIds.Any())
+                //подготавливаем список новых ID от пользователя (защита от null)
+                var incomingLocationIds = dto.Event.EventLocationsIds ?? new List<int>();
+
+                //находим, какие локации нужно УДАЛИТЬ (они есть в БД, но их нет в новом списке)
+                var idsToRemove = existingLocationIds.Except(incomingLocationIds).ToList();
+                if (idsToRemove.Any())
                 {
-                    var newLocations = dto.Event.EventLocationsIds.Select(locId => new EventLocation
+                    var locationsToRemove = _db.EventLocations
+                        .Where(el => el.EventId == EventId && idsToRemove.Contains(el.LocationId));
+                    _db.EventLocations.RemoveRange(locationsToRemove);
+                }
+
+                //находим, какие локации нужно ДОБАВИТЬ (они есть в новом списке, но их нет в БД)
+                var idsToAdd = incomingLocationIds.Except(existingLocationIds).ToList();
+                if (idsToAdd.Any())
+                {
+                    var newLocations = idsToAdd.Select(locId => new EventLocation
                     {
                         EventId = EventId,
                         LocationId = locId
@@ -291,7 +307,7 @@ namespace college_events_admin_API.Controllers
 
 
 
-		[HttpPut("{EventId}/status/{StatusId}")]
+        [HttpPut("{EventId}/status/{StatusId}")]
 		public async Task<ActionResult> PUTEventStatus(int EventId, int StatusId)
 		{
             if (!await _db.Statuses.AnyAsync(s => s.StatusId == StatusId)) return BadRequest("Некорректный id статуса");
@@ -362,7 +378,7 @@ namespace college_events_admin_API.Controllers
 
 
 				List<ActualAttendance>? groupsToDelete = existingGroups
-					.Where(e => !body.Any(g => g.EventGroupId == e.EventGroupId))
+					.Where(e => !body.Any(g => g.ActualAttendanceId == e.ActualAttendanceId))
 					.ToList();
 				if (groupsToDelete.Any())
 				{
@@ -371,7 +387,7 @@ namespace college_events_admin_API.Controllers
 
 
                 List<ActualAttendanceUpdateDto>? groupsToCreate = body
-					.Where(e => !existingGroups.Any(g => g.EventGroupId == e.EventGroupId))
+					.Where(e => !existingGroups.Any(g => g.ActualAttendanceId == e.ActualAttendanceId))
 					.ToList();
 				if (groupsToCreate.Any())
 				{
@@ -388,12 +404,13 @@ namespace college_events_admin_API.Controllers
 
 
                 List<ActualAttendanceUpdateDto>? groupsToUpdate = body
-					.Where(e => existingGroups.Any(g => g.EventGroupId == e.EventGroupId))
+					.Where(e => existingGroups.Any(g => g.ActualAttendanceId == e.ActualAttendanceId))
 					.ToList();
-                var existingGroupsDict = existingGroups.ToDictionary(e => e.EventGroupId);
+
+                var existingGroupsDict = existingGroups.ToDictionary(e => e.ActualAttendanceId);
                 foreach (var updateGroup in groupsToUpdate)
                 {
-                    if (existingGroupsDict.TryGetValue(updateGroup.EventGroupId, out var existing))
+                    if (existingGroupsDict.TryGetValue(updateGroup.ActualAttendanceId, out var existing))
                     {
                         existing.EventGroupId = updateGroup.EventGroupId;
                         existing.ActualListenersCount = updateGroup.ActualListenersCount;
