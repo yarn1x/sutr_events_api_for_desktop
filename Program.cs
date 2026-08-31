@@ -7,7 +7,7 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//builder.WebHost.UseUrls("http://192.168.1.253:33679");
+builder.WebHost.UseUrls("http://192.168.1.253:33679");
 
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -34,12 +34,22 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<EventsService>();
+builder.Services.AddScoped<OrganizerService>();
 builder.Services.AddScoped<AuthorizationService>();
 builder.Services.AddHostedService<BackgroundUpdateService>();
 builder.Services.AddDbContext<SutrEventsDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default"))
 );
 
+//builder.Services.AddW3CLogging(logging =>
+//{
+//    //logging.LoggingFields = Microsoft.AspNetCore.HttpLogging.W3CLoggingFields.ClientIpAddress
+//    //                      | Microsoft.AspNetCore.HttpLogging.W3CLoggingFields.Method
+//    //                      | Microsoft.AspNetCore.HttpLogging.W3CLoggingFields.UriQuery
+//    //                      | Microsoft.AspNetCore.HttpLogging.W3CLoggingFields.Date
+//    //                      | Microsoft.AspNetCore.HttpLogging.W3CLoggingFields.Time;
+//    logging.LoggingFields = Microsoft.AspNetCore.HttpLogging.W3CLoggingFields.All;
+//});
 
 var app = builder.Build();
 
@@ -50,10 +60,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+//app.UseW3CLogging();
 //app.UseHttpsRedirection();
 app.UseAuthentication(); //сначала аутентификация ВАЖЕН ПОРЯДОК
 app.UseAuthorization(); //потом авторизация
 app.MapControllers();
 
-//app.Run("http://0.0.0.0:33679");
-app.Run();
+app.Run("http://0.0.0.0:33679");
+//app.Run();

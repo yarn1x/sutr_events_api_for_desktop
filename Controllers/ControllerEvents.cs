@@ -1,9 +1,11 @@
 ﻿using college_events_admin_API.Models;
 using college_events_admin_API.Models.Data_transfer_objects;
+using college_events_admin_API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Extensions.Logging;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
@@ -12,12 +14,13 @@ namespace college_events_admin_API.Controllers
 	//[Authorize]
 	[ApiController]
 	[Route("/college/admin/events")]
-	public class ControllerEvents(SutrEventsDbContext db) : Controller
-	{
+	public class ControllerEvents(SutrEventsDbContext db, ILogger<ControllerEvents> logger) : Controller
+    {
 		private readonly SutrEventsDbContext _db = db;
+        private readonly ILogger<ControllerEvents> _logger = logger;
 
 
-		[HttpGet]
+        [HttpGet]
 		public ActionResult GETEventList()
 		{
 			var arr = _db.Events
@@ -57,6 +60,7 @@ namespace college_events_admin_API.Controllers
 				.OrderBy(e => e.StatusId).ThenBy(e => e.StartDatetime)
 				.ToList();
 
+			
 			return Ok(arr);
 		}
 

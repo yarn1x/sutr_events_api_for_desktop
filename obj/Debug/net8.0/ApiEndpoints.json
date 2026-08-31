@@ -291,6 +291,27 @@
   },
   {
     "ContainingType": "college_events_admin_API.Controllers.ControllerUsers",
+    "Method": "PUTGrantRoles",
+    "RelativePath": "college/admin/users/{userId}/roles",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "body",
+        "Type": "System.Collections.Generic.List\u00601[[college_events_admin_API.Models.UserUsertype, college_events_admin_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      },
+      {
+        "Name": "userId",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "college_events_admin_API.Controllers.ControllerUsers",
     "Method": "GETRolesList",
     "RelativePath": "college/admin/users/roles",
     "HttpMethod": "POST",

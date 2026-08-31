@@ -20,14 +20,13 @@
 
         private void DoWork(object? state)
         {
-            _logger.LogInformation($"~~~ Проверка актуальности мероприятий ~~~ Время проверки: {DateTime.Now} ~~~");
-
             try
             {
                 using (var scope = _serviceProvider.CreateScope())
                 {
-                    var service = scope.ServiceProvider.GetRequiredService<EventsService>();
-                    int savedCount = service.UpdateEventsStatuses();
+                    _logger.LogInformation($"~~~ Проверка актуальности мероприятий\t~~~\tВремя: {DateTime.Now} ~~~");
+                    var eventService = scope.ServiceProvider.GetRequiredService<EventsService>();
+                    int savedCount = eventService.UpdateEventsStatuses();
 
                     if (savedCount > 0)
                     {
@@ -37,11 +36,25 @@
                     {
                         _logger.LogInformation($"~~~ Нет мероприятий для обновления ~~~");
                     }
+
+
+                    _logger?.LogInformation($"~~~ Назначение новых организаторов\t~~~\tВремя: {DateTime.Now} ~~~");
+                    var organizerService = scope.ServiceProvider.GetRequiredService<OrganizerService>();
+                    savedCount = organizerService.UpdateOrganizerList();
+
+                    if (savedCount > 0)
+                    {
+                        _logger?.LogInformation($"~~~ Назначено новых организаторов: {savedCount} ~~~");
+                    }
+                    else
+                    {
+                        _logger?.LogInformation($"~~~ Нет новых организаторов ~~~");
+                    }
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"~~~ Ошибка обновления статусов! {ex.Message} !!!");
+                _logger.LogError(ex, $"### Ошибка ошибка фоновой службы! {ex} ###");
             }
         }
     }

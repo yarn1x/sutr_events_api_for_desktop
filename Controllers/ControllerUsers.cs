@@ -21,5 +21,11 @@ namespace college_events_admin_API.Controllers
             }).ToList();
             return Ok(arr);
         }
+
+        [HttpPut("{userId}/roles")]
+        public ActionResult PUTGrantRoles([FromBody] List<UserUsertype> body)
+        {
+            return Ok(body);
+        }
     }
 }
