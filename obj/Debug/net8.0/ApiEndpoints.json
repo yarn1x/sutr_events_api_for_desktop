@@ -291,6 +291,32 @@
   },
   {
     "ContainingType": "college_events_admin_API.Controllers.ControllerUsers",
+    "Method": "GETUserList",
+    "RelativePath": "college/admin/users",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "college_events_admin_API.Controllers.ControllerUsers",
+    "Method": "GetUser",
+    "RelativePath": "college/admin/users/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "college_events_admin_API.Controllers.ControllerUsers",
     "Method": "PUTGrantRoles",
     "RelativePath": "college/admin/users/{userId}/roles",
     "HttpMethod": "PUT",

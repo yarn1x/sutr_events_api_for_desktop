@@ -1,0 +1,7 @@
+#Version: 1.0
+#Start-Date: 2026-09-02 10:52:04
+#Fields: date time c-ip cs-username s-computername s-ip s-port cs-method cs-uri-stem cs-uri-query sc-status time-taken cs-version cs-host cs(User-Agent) cs(Cookie) cs(Referer)
+2026-09-02 10:52:03 192.168.1.254 - N0SENCE 192.168.1.253 33679 POST /college/admin/auth/login - 200 331.6542 HTTP/1.1 192.168.1.253:33679 - - -
+2026-09-02 10:52:03 192.168.1.254 admin1 N0SENCE 192.168.1.253 33679 GET /college/admin/events - 200 257.9911 HTTP/1.1 192.168.1.253:33679 - - -
+2026-09-02 10:52:04 192.168.1.254 admin1 N0SENCE 192.168.1.253 33679 GET /college/admin/events/categories - 200 21.2138 HTTP/1.1 192.168.1.253:33679 - - -
+2026-09-02 10:52:11 192.168.1.254 admin1 N0SENCE 192.168.1.253 33679 GET /college/admin/organizers - 200 45.3492 HTTP/1.1 192.168.1.253:33679 - - -

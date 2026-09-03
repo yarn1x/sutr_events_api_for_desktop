@@ -11,6 +11,43 @@ namespace college_events_admin_API.Controllers
     {
         SutrEventsDbContext _db = db;
 
+
+        [HttpGet]
+        public ActionResult GETUserList()
+        {
+            var list = _db.AuthorizedUsers.Select(au => new {
+
+                au.AuthorizedUserId,
+
+                firstname = au.User.FirstName,
+                surname = au.User.LastName,
+                lastname = au.User.MiddleName,
+
+                au.Email,
+                au.Phone,
+                
+                roles = au.UserUsertypes
+                .Where(ut => ut.AuthorizedUserId == au.AuthorizedUserId)
+                .Select(ut => new {
+                    ut.UserUsertypeId,
+                    ut.UserTypeId,
+                }),
+
+            
+            }).ToList();
+
+            return Ok(list);
+        }
+
+        [HttpGet("{userId}")]
+        public ActionResult GetUser(int userId)
+        {
+            var user = _db.AuthorizedUsers
+            .FirstOrDefault(u => u.AuthorizedUserId == userId);
+            return Ok(user);
+        }
+
+
         [HttpPost("roles")]
         public ActionResult GETRolesList()
         {
@@ -22,10 +59,12 @@ namespace college_events_admin_API.Controllers
             return Ok(arr);
         }
 
+
         [HttpPut("{userId}/roles")]
-        public ActionResult PUTGrantRoles([FromBody] List<UserUsertype> body)
+        public ActionResult? PUTGrantRoles([FromBody] List<UserUsertype> body)
         {
-            return Ok(body);
+            //var existingRolesIds = _db.UserUsertypes.Where(UserUsertype => UserUsertype.AuthorizedUserId == body.);
+            return null;
         }
     }
 }
