@@ -219,7 +219,7 @@ namespace college_events_admin_API.Controllers
                 var existingLocationIds = _db.EventLocations
 					.Where(el => el.EventId == EventId)
 					.Select(el => el.LocationId)
-					.ToList();
+					.ToList();	
 
                 //подготавливаем список новых ID от пользователя (защита от null)
                 var incomingLocationIds = dto.Event.EventLocationsIds ?? new List<int>();

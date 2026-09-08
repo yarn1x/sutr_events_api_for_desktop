@@ -306,13 +306,18 @@ public partial class SutrEventsDbContext : DbContext
 
             entity.ToTable("groups");
 
-            entity.Property(e => e.GroupId).HasColumnName("group_id");
-            entity.Property(e => e.AuthorizedUserId).HasColumnName("authorized_user_id");
+            entity.Property(e => e.GroupId)
+                .HasColumnName("group_id");
+            entity.Property(e => e.AuthorizedUserId)
+                .HasColumnName("authorized_user_id");
             entity.Property(e => e.Name)
                 .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("name");
-            entity.Property(e => e.StudentsCount).HasColumnName("students_count");
+            entity.Property(e => e.StudentsCount)
+                .HasColumnName("students_count");
+            entity.Property(e => e.creationDate)
+                .HasColumnName("creation_date");
 
             entity.HasOne(d => d.AuthorizedUser).WithMany(p => p.Groups)
                 .HasForeignKey(d => d.AuthorizedUserId)

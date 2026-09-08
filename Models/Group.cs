@@ -13,6 +13,8 @@ public partial class Group
 
     public int StudentsCount { get; set; }
 
+    public DateOnly creationDate { get; set; }
+
     public virtual AuthorizedUser AuthorizedUser { get; set; } = null!;
 
     public virtual ICollection<EventGroup> EventGroups { get; set; } = new List<EventGroup>();

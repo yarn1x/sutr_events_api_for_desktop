@@ -5,9 +5,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
+//кому не повезло с умением чтения легаси,
+//пиши на @tgn0sense или открывай обсуждение в репозитории
+//https://github.com/yarn1x/sutr_events_api_for_desktop
+
+
+
 var builder = WebApplication.CreateBuilder(args);
 
-//builder.WebHost.UseUrls("http://192.168.1.253:33679");
+//builder.WebHost.UseUrls("http://10.24.205.96:33679");
 
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

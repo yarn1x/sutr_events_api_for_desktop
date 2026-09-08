@@ -25,6 +25,7 @@ namespace college_events_admin_API.Controllers
                 SupervisorLastname = g.AuthorizedUser.User.MiddleName,
                 SupervisorEmail = g.AuthorizedUser.Email,
                 SupervisorPhone = g.AuthorizedUser.Phone,
+                g.creationDate,
                 eventsCount = _db.ActualAttendances.Select(a => new
                 {
                     a.EventGroup.GroupId,
@@ -35,7 +36,7 @@ namespace college_events_admin_API.Controllers
                     c.EventGroup.Event.CategoryId,
                 }).Where(c => c.GroupId == g.GroupId).GroupBy(co => co.CategoryId).Count()
             })
-            .OrderBy(g => g.GroupName);
+            .OrderByDescending(g => g.GroupName);
 
             return Ok(arr);
         }
@@ -43,20 +44,20 @@ namespace college_events_admin_API.Controllers
         [HttpGet("{GroupID}/statistic")]
         public ActionResult GETGroupEventsOnlyStatistic(int GroupID)
         {
-            var arr = _db.ActualAttendances.Select(eg => new
-            {
-                eg.EventGroup.GroupId,
-                eg.EventGroup.EventId,
-                eg.EventGroup.Event.Title,
-                eg.EventGroup.Group.Name,
-                eg.ActualListenersCount,
-                eg.ActualParticipantsCount,
-                eg.ActualSuperParticipantsCount,
-                SupervisorName = eg.EventGroup.Group.AuthorizedUser.User.FirstName,
-                SupervisorSurname = eg.EventGroup.Group.AuthorizedUser.User.LastName,
-                SupervisorMiddlename = eg.EventGroup.Group.AuthorizedUser.User.MiddleName,
-            })
-            .Where(a => a.GroupId == GroupID);
+            var arr = _db.ActualAttendances
+                .Where(a => a.EventGroup.GroupId == GroupID)
+                .Select(eg => new
+                {
+                    eg.EventGroup.EventId,
+                    eg.EventGroup.Event.Title,
+                    eg.EventGroup.Group.Name,
+                    eg.ActualListenersCount,
+                    eg.ActualParticipantsCount,
+                    eg.ActualSuperParticipantsCount,
+                    SupervisorFirstname = eg.EventGroup.Group.AuthorizedUser.User.FirstName,
+                    SupervisorSurname = eg.EventGroup.Group.AuthorizedUser.User.LastName,
+                    SupervisorLastname = eg.EventGroup.Group.AuthorizedUser.User.MiddleName,
+                });
 
 
             return Ok(arr);

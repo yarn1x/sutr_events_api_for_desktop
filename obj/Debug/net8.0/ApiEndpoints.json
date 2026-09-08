@@ -208,6 +208,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "college_events_admin_API.Controllers.ControllerOrganizers",
+    "Method": "GETOrganizerStatistic",
+    "RelativePath": "college/admin/organizers/{organizerId}/statistic",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "organizerId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "college_events_admin_API.Controllers.ControllerLocations",
     "Method": "GETPlaceList",
     "RelativePath": "college/admin/places",
@@ -340,7 +356,7 @@
     "ContainingType": "college_events_admin_API.Controllers.ControllerUsers",
     "Method": "GETRolesList",
     "RelativePath": "college/admin/users/roles",
-    "HttpMethod": "POST",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],

@@ -32,5 +32,21 @@ namespace college_events_admin_API.Controllers
 
             return Ok(arr);
         }
+
+        [HttpGet("{organizerId}/statistic")]
+        public ActionResult GETOrganizerStatistic(int organizerId)
+        {
+            var arr = _db.ActualAttendances.Where(e => e.EventGroup.Event.OrganizerId == organizerId).Select(a => new
+            {
+                a.EventGroup.Event.Title,
+                a.EventGroup.Event.StartDatetime,
+                a.EventGroup.Event.EndDatetime,
+                a.EventGroup.Event.FullDescription,
+                a.ActualListenersCount,
+                a.ActualParticipantsCount,
+                a.ActualSuperParticipantsCount,
+            });
+            return Ok(arr);
+        }
     }
 }

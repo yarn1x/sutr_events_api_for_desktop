@@ -31,6 +31,7 @@ namespace college_events_admin_API.Controllers
                 .Select(ut => new {
                     ut.UserUsertypeId,
                     ut.UserTypeId,
+                    ut.UserType.TypeName,
                 }),
 
             
@@ -48,13 +49,13 @@ namespace college_events_admin_API.Controllers
         }
 
 
-        [HttpPost("roles")]
+        [HttpGet("roles")]
         public ActionResult GETRolesList()
         {
             var arr = _db.UserTypes.Select(t => new
             {
-                roleId = t.UserTypeId,
-                roleName = t.TypeName
+                t.UserTypeId,
+                t.TypeName
             }).ToList();
             return Ok(arr);
         }
