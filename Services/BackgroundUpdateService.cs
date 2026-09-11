@@ -15,7 +15,7 @@
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             _logger.LogInformation("~~~ Фоновая служба обновления статусов мероприятия запущена ~~~");
-            _timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromMinutes(10));
+            _timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromMinutes(5));
         }
 
         private void DoWork(object? state)

@@ -3,20 +3,12 @@
   "WorkspaceRootPath": "C:\\Desktop\\Prog\\\u0421\u0418\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{50BC4A8C-924F-4E3E-8C81-940D8FC302F3}|college_events_admin_API.csproj|c:\\desktop\\prog\\\u0441\u0438\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_api\\controllers\\controllerorganizers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{50BC4A8C-924F-4E3E-8C81-940D8FC302F3}|college_events_admin_API.csproj|solutionrelative:controllers\\controllerorganizers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{50BC4A8C-924F-4E3E-8C81-940D8FC302F3}|college_events_admin_API.csproj|c:\\desktop\\prog\\\u0441\u0438\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_api\\controllers\\controllergroups.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{50BC4A8C-924F-4E3E-8C81-940D8FC302F3}|college_events_admin_API.csproj|solutionrelative:controllers\\controllergroups.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{50BC4A8C-924F-4E3E-8C81-940D8FC302F3}|college_events_admin_API.csproj|c:\\desktop\\prog\\\u0441\u0438\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_api\\services\\eventsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{50BC4A8C-924F-4E3E-8C81-940D8FC302F3}|college_events_admin_API.csproj|solutionrelative:services\\eventsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{50BC4A8C-924F-4E3E-8C81-940D8FC302F3}|college_events_admin_API.csproj|c:\\desktop\\prog\\\u0441\u0438\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{50BC4A8C-924F-4E3E-8C81-940D8FC302F3}|college_events_admin_API.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{50BC4A8C-924F-4E3E-8C81-940D8FC302F3}|college_events_admin_API.csproj|c:\\desktop\\prog\\\u0441\u0438\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_api\\controllers\\controllerusers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{50BC4A8C-924F-4E3E-8C81-940D8FC302F3}|college_events_admin_API.csproj|solutionrelative:controllers\\controllerusers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{50BC4A8C-924F-4E3E-8C81-940D8FC302F3}|college_events_admin_API.csproj|c:\\desktop\\prog\\\u0441\u0438\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -27,20 +19,28 @@
       "RelativeMoniker": "D:0:0:{50BC4A8C-924F-4E3E-8C81-940D8FC302F3}|college_events_admin_API.csproj|solutionrelative:controllers\\controllerevents.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{50BC4A8C-924F-4E3E-8C81-940D8FC302F3}|college_events_admin_API.csproj|c:\\desktop\\prog\\\u0441\u0438\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_api\\controllers\\controllerusers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{50BC4A8C-924F-4E3E-8C81-940D8FC302F3}|college_events_admin_API.csproj|solutionrelative:controllers\\controllerusers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{50BC4A8C-924F-4E3E-8C81-940D8FC302F3}|college_events_admin_API.csproj|c:\\desktop\\prog\\\u0441\u0438\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{50BC4A8C-924F-4E3E-8C81-940D8FC302F3}|college_events_admin_API.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{50BC4A8C-924F-4E3E-8C81-940D8FC302F3}|college_events_admin_API.csproj|c:\\desktop\\prog\\\u0441\u0438\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_api\\models\\group.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{50BC4A8C-924F-4E3E-8C81-940D8FC302F3}|college_events_admin_API.csproj|solutionrelative:models\\group.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{50BC4A8C-924F-4E3E-8C81-940D8FC302F3}|college_events_admin_API.csproj|c:\\desktop\\prog\\\u0441\u0438\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_api\\services\\backgroundupdateservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{50BC4A8C-924F-4E3E-8C81-940D8FC302F3}|college_events_admin_API.csproj|solutionrelative:services\\backgroundupdateservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{50BC4A8C-924F-4E3E-8C81-940D8FC302F3}|college_events_admin_API.csproj|c:\\desktop\\prog\\\u0441\u0438\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_api\\services\\organizerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{50BC4A8C-924F-4E3E-8C81-940D8FC302F3}|college_events_admin_API.csproj|solutionrelative:services\\organizerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{50BC4A8C-924F-4E3E-8C81-940D8FC302F3}|college_events_admin_API.csproj|c:\\desktop\\prog\\\u0441\u0438\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_api\\services\\backgroundupdateservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{50BC4A8C-924F-4E3E-8C81-940D8FC302F3}|college_events_admin_API.csproj|solutionrelative:services\\backgroundupdateservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{50BC4A8C-924F-4E3E-8C81-940D8FC302F3}|college_events_admin_API.csproj|c:\\desktop\\prog\\\u0441\u0438\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_api\\services\\eventsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{50BC4A8C-924F-4E3E-8C81-940D8FC302F3}|college_events_admin_API.csproj|solutionrelative:services\\eventsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{50BC4A8C-924F-4E3E-8C81-940D8FC302F3}|college_events_admin_API.csproj|c:\\desktop\\prog\\\u0441\u0438\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_api\\controllers\\controllerorganizers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{50BC4A8C-924F-4E3E-8C81-940D8FC302F3}|college_events_admin_API.csproj|solutionrelative:controllers\\controllerorganizers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{50BC4A8C-924F-4E3E-8C81-940D8FC302F3}|college_events_admin_API.csproj|c:\\desktop\\prog\\\u0441\u0438\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_api\\models\\group.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{50BC4A8C-924F-4E3E-8C81-940D8FC302F3}|college_events_admin_API.csproj|solutionrelative:models\\group.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,7 +50,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 377,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -58,32 +58,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Desktop\\Prog\\\u0421\u0418\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_API\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
               "ToolTip": "C:\\Desktop\\Prog\\\u0421\u0418\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_API\\appsettings.json",
               "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAOAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2026-08-31T13:38:12.969Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Desktop\\Prog\\\u0421\u0418\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_API\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Desktop\\Prog\\\u0421\u0418\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_API\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAAAC4AAABLAAAAAAAAAA==",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAADEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-30T10:07:30.855Z"
+              "WhenOpened": "2026-08-30T10:07:30.855Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
               "Title": "ControllerEvents.cs",
               "DocumentMoniker": "C:\\Desktop\\Prog\\\u0421\u0418\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_API\\Controllers\\ControllerEvents.cs",
               "RelativeDocumentMoniker": "Controllers\\ControllerEvents.cs",
@@ -91,47 +92,51 @@
               "RelativeToolTip": "Controllers\\ControllerEvents.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAN0AAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-30T10:07:32.985Z"
+              "WhenOpened": "2026-08-30T10:07:32.985Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "ControllerUsers.cs",
               "DocumentMoniker": "C:\\Desktop\\Prog\\\u0421\u0418\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_API\\Controllers\\ControllerUsers.cs",
               "RelativeDocumentMoniker": "Controllers\\ControllerUsers.cs",
               "ToolTip": "C:\\Desktop\\Prog\\\u0421\u0418\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_API\\Controllers\\ControllerUsers.cs",
               "RelativeToolTip": "Controllers\\ControllerUsers.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAAAgwDkAAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAQwCUAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-31T12:35:49.112Z"
+              "WhenOpened": "2026-08-31T12:35:49.112Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 5,
               "Title": "BackgroundUpdateService.cs",
               "DocumentMoniker": "C:\\Desktop\\Prog\\\u0421\u0418\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_API\\Services\\BackgroundUpdateService.cs",
               "RelativeDocumentMoniker": "Services\\BackgroundUpdateService.cs",
               "ToolTip": "C:\\Desktop\\Prog\\\u0421\u0418\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_API\\Services\\BackgroundUpdateService.cs",
               "RelativeToolTip": "Services\\BackgroundUpdateService.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAowBoAAABeAAAAAAAAAA==",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAQwBEAAABSAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-31T13:07:30.754Z"
+              "WhenOpened": "2026-08-31T13:07:30.754Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 6,
               "Title": "OrganizerService.cs",
               "DocumentMoniker": "C:\\Desktop\\Prog\\\u0421\u0418\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_API\\Services\\OrganizerService.cs",
               "RelativeDocumentMoniker": "Services\\OrganizerService.cs",
               "ToolTip": "C:\\Desktop\\Prog\\\u0421\u0418\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_API\\Services\\OrganizerService.cs",
               "RelativeToolTip": "Services\\OrganizerService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-31T18:23:00.683Z"
+              "WhenOpened": "2026-08-31T18:23:00.683Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "EventsService.cs",
               "DocumentMoniker": "C:\\Desktop\\Prog\\\u0421\u0418\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_API\\Services\\EventsService.cs",
               "RelativeDocumentMoniker": "Services\\EventsService.cs",
@@ -144,33 +149,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 8,
               "Title": "ControllerOrganizers.cs",
               "DocumentMoniker": "C:\\Desktop\\Prog\\\u0421\u0418\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_API\\Controllers\\ControllerOrganizers.cs",
               "RelativeDocumentMoniker": "Controllers\\ControllerOrganizers.cs",
               "ToolTip": "C:\\Desktop\\Prog\\\u0421\u0418\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_API\\Controllers\\ControllerOrganizers.cs",
               "RelativeToolTip": "Controllers\\ControllerOrganizers.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAgwC4AAAAvAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFcAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-09-03T16:46:27.67Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "ControllerGroups.cs",
               "DocumentMoniker": "C:\\Desktop\\Prog\\\u0421\u0418\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_API\\Controllers\\ControllerGroups.cs",
               "RelativeDocumentMoniker": "Controllers\\ControllerGroups.cs",
-              "ToolTip": "C:\\Desktop\\Prog\\\u0421\u0418\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_API\\Controllers\\ControllerGroups.cs",
-              "RelativeToolTip": "Controllers\\ControllerGroups.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAgwCYAAAAeAAAAAAAAAA==",
+              "ToolTip": "C:\\Desktop\\Prog\\\u0421\u0418\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_API\\Controllers\\ControllerGroups.cs*",
+              "RelativeToolTip": "Controllers\\ControllerGroups.cs*",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAQwDYAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-09-04T13:47:25.336Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "Group.cs",
               "DocumentMoniker": "C:\\Desktop\\Prog\\\u0421\u0418\u0441\u0442\u0435\u043C\u043D\u044B\u0439 \u043F\u0440\u043E\u0433\u0435\u0440\\college_events_admin_API\\Models\\Group.cs",
               "RelativeDocumentMoniker": "Models\\Group.cs",

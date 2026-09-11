@@ -44,7 +44,10 @@ builder.Services.AddScoped<OrganizerService>();
 builder.Services.AddScoped<AuthorizationService>();
 builder.Services.AddHostedService<BackgroundUpdateService>();
 builder.Services.AddDbContext<SutrEventsDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Default"))
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("Default"),
+        o => o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)
+        )
 );
 
 //builder.Services.AddW3CLogging(logging =>

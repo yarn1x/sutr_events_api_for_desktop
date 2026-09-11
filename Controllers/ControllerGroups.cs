@@ -50,7 +50,7 @@ namespace college_events_admin_API.Controllers
                 {
                     eg.EventGroup.EventId,
                     eg.EventGroup.Event.Title,
-                    eg.EventGroup.Group.Name,
+                    GroupName = eg.EventGroup.Group.Name,
                     eg.ActualListenersCount,
                     eg.ActualParticipantsCount,
                     eg.ActualSuperParticipantsCount,
