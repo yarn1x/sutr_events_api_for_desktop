@@ -26,7 +26,7 @@ namespace college_events_admin_API.Controllers
                 u.UserType.TypeName,
                 u.AuthorizedUser.Email,
                 u.AuthorizedUser.Phone,
-                eventsCount = _db.Events.Where(uid => uid.OrganizerId == u.AuthorizedUser.UserId).Count()
+                eventsCount = _db.Events.Where(uid => uid.OrganizerId == u.AuthorizedUser.UserId && uid.StatusId == 4).Count()
             })
             .Where(t => t.UserTypeId == 3)
             .ToList();
