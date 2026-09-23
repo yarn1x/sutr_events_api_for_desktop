@@ -15,7 +15,7 @@ public partial class Group
 
     public DateOnly creationDate { get; set; }
 
-    public virtual AuthorizedUser AuthorizedUser { get; set; } = null!;
+    public virtual AuthorizedUser? AuthorizedUser { get; set; }
 
     public virtual ICollection<EventGroup> EventGroups { get; set; } = new List<EventGroup>();
 }

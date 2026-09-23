@@ -47,7 +47,11 @@ namespace college_events_admin_API.Controllers
                     StatusName = e.Status.Name,
 
                     //НЕ МЕНЯТЬ ИМЕНА ПОЛЕЙ. ЧЕРЕВАТО НЕИЗВЕСТНЫМИ ОШИБКАМИ
-                    OrganizerName = e.Organizer.User.FirstName,
+                    //Во всей системе, на стороне настольного приложения
+                    //firstname - имя
+                    //surname - фамилия
+                    //lastname - отчество
+                    OrganizerFirstName = e.Organizer.User.FirstName,
 					OrganizerSurname = e.Organizer.User.LastName,
 					OrganizerLastname = e.Organizer.User.MiddleName,
 					e.OrganizerOrganization,

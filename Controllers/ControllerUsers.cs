@@ -20,6 +20,10 @@ namespace college_events_admin_API.Controllers
             .Select(au => new
             {
                 au.AuthorizedUserId,
+                //Во всей системе, на стороне настольного приложения
+                //firstname - имя
+                //surname - фамилия
+                //lastname - отчество
                 firstname = au.User.FirstName,
                 surname = au.User.LastName,
                 lastname = au.User.MiddleName,

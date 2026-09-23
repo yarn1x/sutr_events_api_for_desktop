@@ -19,6 +19,10 @@ namespace college_events_admin_API.Controllers
             {
                 u.AuthorizedUser.UserId,
                 //НЕ МЕНЯТЬ ИМЕНА ПОЛЕЙ. ЧЕРЕВАТО НЕИЗВЕСТНЫМИ ОШИБКАМИ
+                //Во всей системе, на стороне настольного приложения
+                //firstname - имя
+                //surname - фамилия
+                //lastname - отчество
                 u.AuthorizedUser.User.FirstName,
                 SurName = u.AuthorizedUser.User.LastName,
                 LastName = u.AuthorizedUser.User.MiddleName,
@@ -51,7 +55,8 @@ namespace college_events_admin_API.Controllers
                     a.EventGroup.Event.Title,
                     a.EventGroup.Event.StartDatetime,
                     a.EventGroup.Event.EndDatetime,
-                    a.EventGroup.Event.FullDescription
+                    a.EventGroup.Event.FullDescription,
+                    a.EventGroup.Event.Category.Name,
                 })
                 .Select(g => new
                 {
@@ -60,12 +65,13 @@ namespace college_events_admin_API.Controllers
                     g.Key.StartDatetime,
                     g.Key.EndDatetime,
                     g.Key.FullDescription,
+                    CategoryName = g.Key.Name,
 
                     ListenersCount = g.Sum(a => a.ActualListenersCount),
                     ParticipantsCount = g.Sum(a => a.ActualParticipantsCount),
                     SuperParticipantsCount = g.Sum(a => a.ActualSuperParticipantsCount),
 
-                    SupervisorIds = g.Select(a => a.EventGroup.Group.AuthorizedUserId).Distinct().ToList()
+                    SupervisorIds = g.Select(a => a.EventGroup.Group.AuthorizedUserId).Distinct()
                 })
                 .ToListAsync();
 
@@ -97,7 +103,8 @@ namespace college_events_admin_API.Controllers
                     e.Title,
                     e.StartDatetime,
                     e.EndDatetime,
-                    e.FullDescription, 
+                    e.FullDescription,
+                    e.CategoryName,
                     actualListenersCount = e.ListenersCount,
                     actualParticipantsCount = e.ParticipantsCount,
                     actualSuperParticipantsCount = e.SuperParticipantsCount

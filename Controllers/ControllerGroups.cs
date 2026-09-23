@@ -20,7 +20,11 @@ namespace college_events_admin_API.Controllers
                 g.GroupId,
                 GroupName = g.Name,
                 //НЕ МЕНЯТЬ ИМЕНА ПОЛЕЙ. ЧЕРЕВАТО НЕИЗВЕСТНЫМИ ОШИБКАМИ
-                SupervisorName = g.AuthorizedUser.User.FirstName,
+                //Во всей системе, на стороне настольного приложения
+                //firstname - имя
+                //surname - фамилия
+                //lastname - отчество
+                SupervisorFirstName = g.AuthorizedUser.User.FirstName,
                 SupervisorSurname = g.AuthorizedUser.User.LastName,
                 SupervisorLastname = g.AuthorizedUser.User.MiddleName,
                 SupervisorEmail = g.AuthorizedUser.Email,

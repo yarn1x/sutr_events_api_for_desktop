@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("college_events_admin_API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9a3505301bc8ace41c616e89fb27eb0bcc714ff0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f464a70d8ed0e48f028e20409e2ad861d3cabf98")]
 [assembly: System.Reflection.AssemblyProductAttribute("college_events_admin_API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("college_events_admin_API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
