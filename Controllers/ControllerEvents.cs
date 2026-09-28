@@ -14,10 +14,9 @@ namespace college_events_admin_API.Controllers
 	//[Authorize]
 	[ApiController]
 	[Route("/college/admin/events")]
-	public class ControllerEvents(SutrEventsDbContext db, ILogger<ControllerEvents> logger) : Controller
+	public class ControllerEvents(SutrEventsDbContext db) : Controller
     {
 		private readonly SutrEventsDbContext _db = db;
-        private readonly ILogger<ControllerEvents> _logger = logger;
 
 
         [HttpGet]
@@ -98,9 +97,9 @@ namespace college_events_admin_API.Controllers
 				e.EventId,
 				e.GroupId,
 				e.Group.Name,
-				SupervisorName = e.Group.AuthorizedUser.User.FirstName,
-				SupervisorSurname = e.Group.AuthorizedUser.User.LastName,
-				SupervisorLastname = e.Group.AuthorizedUser.User.MiddleName,
+				SupervisorName = e.Group.AuthorizedUser!.User.FirstName,
+				SupervisorSurname = e.Group.AuthorizedUser!.User.LastName,
+				SupervisorLastname = e.Group.AuthorizedUser!.User.MiddleName,
 				e.ExpectedListenersCount,
 				e.ExpectedParticipantsCount,
 				e.ExpectedSuperParticipantsCount,
@@ -359,9 +358,9 @@ namespace college_events_admin_API.Controllers
 					a.EventGroup.Group.GroupId,
 					groupName = a.EventGroup.Group.Name,
 
-					supervisorName = a.EventGroup.Group.AuthorizedUser.User.FirstName,
-					supervisorSurname = a.EventGroup.Group.AuthorizedUser.User.LastName,
-                    supervisorLastname = a.EventGroup.Group.AuthorizedUser.User.MiddleName,
+                    supervisorName = a.EventGroup.Group.AuthorizedUser!.User.FirstName,
+					supervisorSurname = a.EventGroup.Group.AuthorizedUser!.User.LastName,
+                    supervisorLastname = a.EventGroup.Group.AuthorizedUser!.User.MiddleName,
 
                 })
 				.ToListAsync();

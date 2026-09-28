@@ -5,11 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
-//кому не повезло с умением чтения легаси,
-//пиши на @tgn0sense или открывай обсуждение в репозитории
-//https://github.com/yarn1x/sutr_events_api_for_desktop
-
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,13 +16,22 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
-            ValidateIssuer = true, // указывает, будет ли валидироваться издатель при валидации токена
-            ValidIssuer = AuthOptions.ISSUER,// строка, представляющая издателя
-            ValidateAudience = true,// будет ли валидироваться потребитель токена
-            ValidAudience = AuthOptions.AUDIENCE,// установка потребителя токена
-            ValidateLifetime = true,// будет ли валидироваться время существования
-            IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),// установка ключа безопасности
-            ValidateIssuerSigningKey = true,// валидация ключа безопасности
+            //указывает, будет ли валидироваться издатель при валидации токена
+            ValidateIssuer = true, 
+            //строка, представляющая издателя
+            ValidIssuer = AuthOptions.ISSUER,
+            //будет ли валидироваться потребитель токена
+            ValidateAudience = true,
+            //установка потребителя токена
+            ValidAudience = AuthOptions.AUDIENCE,
+            //будет ли валидироваться время существования
+            ValidateLifetime = true,
+            //установка ключа безопасности
+            IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
+            //валидация ключа безопасности
+            ValidateIssuerSigningKey = true,
+            //определяет по умолчанию время для валидации
+            //по умолчанию выставил 0, время для валидации указано в сервисе авторизации
             ClockSkew = TimeSpan.Zero,
         };
     });
@@ -71,8 +75,10 @@ if (app.Environment.IsDevelopment())
 
 //app.UseW3CLogging();
 //app.UseHttpsRedirection();
+
 app.UseAuthentication(); //сначала аутентификация ВАЖЕН ПОРЯДОК
 app.UseAuthorization(); //потом авторизация
+
 app.MapControllers();
 
 //app.Run("http://0.0.0.0:33679");

@@ -27,6 +27,7 @@ namespace college_events_admin_API.Controllers
                 firstname = au.User.FirstName,
                 surname = au.User.LastName,
                 lastname = au.User.MiddleName,
+                au.Login,
                 au.Email,
                 au.Phone,
                 
@@ -50,6 +51,7 @@ namespace college_events_admin_API.Controllers
                 u.firstname,
                 u.surname,
                 u.lastname,
+                u.Login,
                 u.Email,
                 u.Phone,
                 u.roles,

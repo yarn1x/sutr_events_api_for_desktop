@@ -9,24 +9,38 @@ namespace college_events_admin_API.Services
 {
     public class AuthorizationService
     {
-        public string GenerateJwtToken(LoginRequest user)
+        private readonly DateTime _AccessJwtExpires = DateTime.UtcNow.Add(TimeSpan.FromMinutes(30));
+
+        public JwtToken GenerateJwtToken(LoginRequest user)
         {
             var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.login) };
             var jwt = new JwtSecurityToken(
                     issuer: AuthOptions.ISSUER,
                     audience: AuthOptions.AUDIENCE,
                     claims: claims,
-                    expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(15)),
+                    expires: _AccessJwtExpires,
                     signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
-            return new JwtSecurityTokenHandler().WriteToken(jwt);
+            return new JwtToken()
+            {
+                SerializedJwtToken = new JwtSecurityTokenHandler().WriteToken(jwt),
+                //В UTC!!!
+                ExpiresIn = _AccessJwtExpires
+            };
         }
     }
+
+    public class JwtToken
+    {
+        public required string SerializedJwtToken { get; set; }
+        public required DateTime ExpiresIn { get; set; }
+    }
+
     public class AuthOptions
     {
         public const string ISSUER = "ApiServer";
         public const string AUDIENCE = "AuthClient";
         const string KEY = "supersupersupersupersecretkey!123";
-        public static SymmetricSecurityKey GetSymmetricSecurityKey() =>
-            new SymmetricSecurityKey(Encoding.UTF8.GetBytes(KEY));
+
+        public static SymmetricSecurityKey GetSymmetricSecurityKey() => new SymmetricSecurityKey(Encoding.UTF8.GetBytes(KEY));
     }
 }
