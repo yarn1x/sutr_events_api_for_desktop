@@ -67,20 +67,20 @@ namespace college_events_admin_API.Controllers
                     g.Key.FullDescription,
                     CategoryName = g.Key.Name,
 
-                    ListenersCount = g.Sum(a => a.ActualListenersCount),
-                    ParticipantsCount = g.Sum(a => a.ActualParticipantsCount),
-                    SuperParticipantsCount = g.Sum(a => a.ActualSuperParticipantsCount),
+                    ActualListenersCount = g.Sum(a => a.ActualListenersCount),
+                    ActualParticipantsCount = g.Sum(a => a.ActualParticipantsCount),
+                    ActualSuperParticipantsCount = g.Sum(a => a.ActualSuperParticipantsCount),
 
                     SupervisorIds = g.Select(a => a.EventGroup.Group.AuthorizedUserId).Distinct()
                 })
                 .ToListAsync();
 
             //считаем сколько суммарно слушателей на всех мероприятиях
-            int totalListeners = groupedEvents.Sum(e => e.ListenersCount);
+            int totalListeners = groupedEvents.Sum(e => e.ActualListenersCount);
             //сколько суммарно участников
-            int totalParticipants = groupedEvents.Sum(e => e.ParticipantsCount);
+            int totalParticipants = groupedEvents.Sum(e => e.ActualParticipantsCount);
             //сколько супер-участников
-            int totalSuperParticipants = groupedEvents.Sum(e => e.SuperParticipantsCount);
+            int totalSuperParticipants = groupedEvents.Sum(e => e.ActualSuperParticipantsCount);
             
             //считаем сколько организатор провёл мероприятий (именно провёл, а не всего мероприятий с указанием этого организатора)
             int eventsCount = groupedEvents.Count;
@@ -105,9 +105,9 @@ namespace college_events_admin_API.Controllers
                     e.EndDatetime,
                     e.FullDescription,
                     e.CategoryName,
-                    actualListenersCount = e.ListenersCount,
-                    actualParticipantsCount = e.ParticipantsCount,
-                    actualSuperParticipantsCount = e.SuperParticipantsCount
+                    e.ActualListenersCount,
+                    e.ActualParticipantsCount,
+                    e.ActualSuperParticipantsCount
                 }).ToList()
             });
         }
