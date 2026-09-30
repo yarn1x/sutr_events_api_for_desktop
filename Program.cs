@@ -45,6 +45,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<EventsService>();
 builder.Services.AddScoped<OrganizerService>();
+builder.Services.AddScoped<SupervisorService>();
 builder.Services.AddScoped<AuthorizationService>();
 builder.Services.AddHostedService<BackgroundUpdateService>();
 builder.Services.AddDbContext<SutrEventsDbContext>(options =>

@@ -22,17 +22,17 @@ namespace college_events_admin_API.Services
             int savedCount = 0;
 
             //статус, на который будет обновлено мероприятие
-            byte newStatus = 1;
+            byte newStatus = EventConstant.status_suggested;
 
 
             //со статуса #2 на статус #3
             try
             {
-                newStatus = 3;
+                newStatus = EventConstant.status_done_report_needed;
 
                 //список мероприятий, которые нужно изменить
                 var expired_events = _db.Events
-                    .Where(e => e.StatusId == 2 && e.EndDatetime <= realTime)
+                    .Where(e => e.StatusId == EventConstant.status_applied && e.EndDatetime <= realTime)
                     .ToList();
 
                 if (expired_events.Any())
@@ -57,11 +57,11 @@ namespace college_events_admin_API.Services
             //(со статуса #3 на статус #2)
             try {
 
-                newStatus = 2;
+                newStatus = EventConstant.status_applied;
 
                 //список мероприятий, которые нужно изменить
                 var fake_expired_events = _db.Events
-                    .Where(e => e.StatusId == 3 && e.EndDatetime >= realTime)
+                    .Where(e => e.StatusId == EventConstant.status_done_report_needed && e.EndDatetime >= realTime)
                     .ToList();
 
                 if (fake_expired_events.Any())
@@ -70,7 +70,7 @@ namespace college_events_admin_API.Services
                     foreach (Event fake_expired_event in fake_expired_events)
                     {
                         _logger?.LogInformation($"~~ Обновление мероприятия: {fake_expired_event.Title} (ID: {fake_expired_event.EventId}). StatusId {fake_expired_event.StatusId} -> {newStatus} ~~");
-                        fake_expired_event.StatusId = 2;
+                        fake_expired_event.StatusId = newStatus;
                     }
                     savedCount += _db.SaveChanges();
                 }

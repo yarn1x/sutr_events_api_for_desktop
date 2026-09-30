@@ -306,6 +306,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "college_events_admin_API.Controllers.ControllerSupervisors",
+    "Method": "GETSupervisorStatistic",
+    "RelativePath": "college/admin/supervisors/{supervisorId}/statistic",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "supervisorId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "college_events_admin_API.Controllers.ControllerUsers",
     "Method": "GETUserList",
     "RelativePath": "college/admin/users",

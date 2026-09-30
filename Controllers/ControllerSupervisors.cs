@@ -1,6 +1,7 @@
 ﻿using college_events_admin_API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Linq;
 
 namespace college_events_admin_API.Controllers
@@ -35,6 +36,38 @@ namespace college_events_admin_API.Controllers
             .ToList();
 
             return Ok(arr);
+        }
+
+        [HttpGet("{supervisorId}/statistic")]
+        public ActionResult GETSupervisorStatistic(int supervisorId)
+        {
+            var baseQuery = _db.ActualAttendances
+                .Where(aa => aa.EventGroup.Group.AuthorizedUserId == supervisorId);
+
+            var response = baseQuery
+                .GroupBy(events => new
+                {
+                    events.EventGroup.EventId,
+                    events.EventGroup.Event.Title,
+                    categoryName = events.EventGroup.Event.Category.Name,
+                    groupName = events.EventGroup.Group.Name,
+                    events.ActualListenersCount,
+                    events.ActualParticipantsCount,
+                    events.ActualSuperParticipantsCount,
+                    events.TotalScore,
+                })
+                .Select(k => new
+                {
+                    k.Key.EventId,
+                    k.Key.Title,
+                    k.Key.categoryName,
+                    k.Key.groupName,
+                    k.Key.ActualListenersCount,
+                    k.Key.ActualParticipantsCount,
+                    k.Key.ActualSuperParticipantsCount,
+                    k.Key.TotalScore,
+                });
+            return Ok(response);
         }
     }
 }

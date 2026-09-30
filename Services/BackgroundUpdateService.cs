@@ -38,7 +38,7 @@
                     }
 
 
-                    _logger?.LogInformation($"~~~ Назначение новых организаторов\t~~~\tВремя: {DateTime.Now} ~~~");
+                    _logger?.LogInformation($"~~~ Проверка наличия новых организаторов\t~~~\tВремя: {DateTime.Now} ~~~");
                     var organizerService = scope.ServiceProvider.GetRequiredService<OrganizerService>();
                     savedCount = organizerService.UpdateOrganizerList();
 
@@ -46,15 +46,20 @@
                     {
                         _logger?.LogInformation($"~~~ Назначено новых организаторов: {savedCount} ~~~");
                     }
-                    else
+
+                    _logger?.LogInformation($"~~~ Проверка наличия новых кураторов\t~~~\tВремя: {DateTime.Now} ~~~");
+                    var supervisorService = scope.ServiceProvider.GetRequiredService<SupervisorService>();
+                    savedCount = supervisorService.UpdateSupervisorList();
+
+                    if (savedCount > 0)
                     {
-                        _logger?.LogInformation($"~~~ Нет новых организаторов ~~~");
+                        _logger?.LogInformation($"~~~ Назначено новых кураторов: {savedCount} ~~~");
                     }
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"### Ошибка ошибка фоновой службы! {ex} ###");
+                _logger.LogError(ex, $"### Ошибка работы фоновой службы! {ex} ###");
             }
         }
     }
