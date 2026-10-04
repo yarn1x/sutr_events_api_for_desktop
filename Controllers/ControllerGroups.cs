@@ -1,4 +1,5 @@
-﻿using college_events_admin_API.Models;
+﻿using Azure;
+using college_events_admin_API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -46,25 +47,51 @@ namespace college_events_admin_API.Controllers
         }
 
         [HttpGet("{GroupID}/statistic")]
-        public ActionResult GETGroupEventsOnlyStatistic(int GroupID)
+        public async Task<ActionResult> GETGroupEventsOnlyStatistic(int GroupID)
         {
-            var arr = _db.ActualAttendances
+            var response = await _db.ActualAttendances
                 .Where(a => a.EventGroup.GroupId == GroupID)
+                .GroupBy(g => new
+                {
+                    g.EventGroup.GroupId,
+                    g.EventGroup.Event.CategoryId,
+                    CategoryName = g.EventGroup.Event.Category.Name,
+                    g.EventGroup.Event.Title,
+                    g.ActualListenersCount,
+                    g.ActualParticipantsCount,
+                    g.ActualSuperParticipantsCount,
+                    g.TotalScore,
+                })
                 .Select(eg => new
                 {
-                    eg.EventGroup.EventId,
-                    eg.EventGroup.Event.Title,
-                    GroupName = eg.EventGroup.Group.Name,
-                    eg.ActualListenersCount,
-                    eg.ActualParticipantsCount,
-                    eg.ActualSuperParticipantsCount,
-                    SupervisorFirstname = eg.EventGroup.Group.AuthorizedUser.User.FirstName,
-                    SupervisorSurname = eg.EventGroup.Group.AuthorizedUser.User.LastName,
-                    SupervisorLastname = eg.EventGroup.Group.AuthorizedUser.User.MiddleName,
-                });
+                    eg.Key.Title,
+                    eg.Key.CategoryId,
+                    eg.Key.CategoryName,
+                    eg.Key.ActualListenersCount,
+                    eg.Key.ActualParticipantsCount,
+                    eg.Key.ActualSuperParticipantsCount,
+                    eg.Key.TotalScore,
+                })
+                .ToListAsync();
+
+            /*дополнительно всякие статистические циферки*/
+            //количество мероприятий, на которое был записан данный куратор (а точнее, сколько раз его группы присутствовали на мероприятии)
+            int eventsCount = response.Count;
+
+            //количество направлений мероприятий (сколько различных направлений посетили группы куратора)
+            int categoriesCount = response.Select(c => c.CategoryId).Distinct().Count();
+
+            //тоталити сколько баллов за все мероприятия
+            int totalScore = response.Sum(ts => ts.TotalScore);
 
 
-            return Ok(arr);
+            return Ok(new
+            {
+                eventsCount,
+                categoriesCount,
+                totalScore,
+                events = response
+            });
         }
     }
 }

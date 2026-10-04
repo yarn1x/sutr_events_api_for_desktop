@@ -51,7 +51,6 @@ namespace college_events_admin_API.Controllers
             var response = await baseQuery
                 .GroupBy(events => new
                 {
-                    events.EventGroup.EventId,
                     events.EventGroup.Event.Title,
                     events.EventGroup.Event.CategoryId,
                     categoryName = events.EventGroup.Event.Category.Name,
@@ -63,7 +62,6 @@ namespace college_events_admin_API.Controllers
                 })
                 .Select(k => new
                 {
-                    k.Key.EventId,
                     k.Key.Title,
                     k.Key.CategoryId,
                     k.Key.categoryName,
@@ -76,7 +74,7 @@ namespace college_events_admin_API.Controllers
 
             /*дополнительно всякие статистические циферки*/
             //количество мероприятий, на которое был записан данный куратор (а точнее, сколько раз его группы присутствовали на мероприятии)
-            int eventsCount = response.Count;
+            int eventsCount = response.Select(e => e.Title).Distinct().Count();
 
             //количество направлений мероприятий (сколько различных направлений посетили группы куратора)
             int categoriesCount = response.Select(c => c.CategoryId).Distinct().Count();
@@ -84,22 +82,22 @@ namespace college_events_admin_API.Controllers
             //тоталити сколько баллов за все мероприятия
             int totalScore = response.Sum(ts => ts.TotalScore);
 
+            //группы куратора
+            IQueryable supervisorGroups = _db.Groups.Where(u => u.AuthorizedUserId == supervisorId).Select(g => new
+            {
+                groupName = g.Name,
+                g.creationDate
+            });
+
             return Ok(new
             {
                 eventsCount,
                 categoriesCount,
                 totalScore,
 
-                events = response.Select(e => new
-                {
-                    e.groupName,
-                    e.Title,
-                    e.categoryName,
-                    e.ActualListenersCount,
-                    e.ActualParticipantsCount,
-                    e.ActualSuperParticipantsCount,
-                    e.TotalScore,
-                })
+                supervisorGroups,
+
+                events = response
             });
         }
     }

@@ -8,7 +8,7 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//builder.WebHost.UseUrls("http://10.24.205.96:33679");
+//builder.WebHost.UseUrls("http://192.168.1.253:33679");
 
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
