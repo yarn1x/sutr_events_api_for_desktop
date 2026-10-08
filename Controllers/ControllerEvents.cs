@@ -87,6 +87,19 @@ namespace college_events_admin_API.Controllers
 
 
 
+		[HttpGet("criteria")]
+		public ActionResult GETCriteriaList()
+		{
+			return Ok(_db.Criteria.Select(c => new
+			{
+				c.CriterionId,
+				criterionName = c.Name,
+				c.Score,
+			}));
+		}
+
+
+
 
 		[HttpGet("{EventId}/groups")]
 		public ActionResult GETEventGroups(int EventId)
@@ -97,6 +110,7 @@ namespace college_events_admin_API.Controllers
 				e.EventId,
 				e.GroupId,
 				e.Group.Name,
+				e.Group.StudentsCount,
 				SupervisorName = e.Group.AuthorizedUser!.User.FirstName,
 				SupervisorSurname = e.Group.AuthorizedUser!.User.LastName,
 				SupervisorLastname = e.Group.AuthorizedUser!.User.MiddleName,
@@ -378,12 +392,12 @@ namespace college_events_admin_API.Controllers
 
             try
             {
-                // получаем существующие группы для этого события
+                //получаем существующие группы для этого события
                 List<ActualAttendance>? existingGroups = await _db.ActualAttendances
                     .Where(g => g.EventGroup.EventId == EventId)
                     .ToListAsync();
 
-
+				//получаем группы на удаление из статистики
 				List<ActualAttendance>? groupsToDelete = existingGroups
 					.Where(e => !body.Any(g => g.ActualAttendanceId == e.ActualAttendanceId))
 					.ToList();
@@ -392,7 +406,7 @@ namespace college_events_admin_API.Controllers
 					_db.ActualAttendances.RemoveRange(groupsToDelete);
 				}
 
-
+				//получаем список групп для добавления в статистику
                 List<ActualAttendanceUpdateDto>? groupsToCreate = body
 					.Where(e => !existingGroups.Any(g => g.ActualAttendanceId == e.ActualAttendanceId))
 					.ToList();
@@ -409,7 +423,7 @@ namespace college_events_admin_API.Controllers
 					_db.ActualAttendances.AddRange(newGroups);
 				}
 
-
+				//получаем список групп, которые нужно отредактировать
                 List<ActualAttendanceUpdateDto>? groupsToUpdate = body
 					.Where(e => existingGroups.Any(g => g.ActualAttendanceId == e.ActualAttendanceId))
 					.ToList();

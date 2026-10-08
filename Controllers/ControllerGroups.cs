@@ -31,6 +31,7 @@ namespace college_events_admin_API.Controllers
                 SupervisorEmail = g.AuthorizedUser.Email,
                 SupervisorPhone = g.AuthorizedUser.Phone,
                 g.creationDate,
+                g.StudentsCount,
                 eventsCount = _db.ActualAttendances.Select(a => new
                 {
                     a.EventGroup.GroupId,

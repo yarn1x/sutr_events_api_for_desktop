@@ -111,6 +111,16 @@
   },
   {
     "ContainingType": "college_events_admin_API.Controllers.ControllerEvents",
+    "Method": "GETCriteriaList",
+    "RelativePath": "college/admin/events/criteria",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "college_events_admin_API.Controllers.ControllerEvents",
     "Method": "PUTUpdateFullEvent",
     "RelativePath": "college/admin/events/update/{EventId}",
     "HttpMethod": "PUT",
