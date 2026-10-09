@@ -25,7 +25,7 @@ namespace college_events_admin_API.Controllers
                 //firstname - имя
                 //surname - фамилия
                 //lastname - отчество
-                SupervisorFirstName = g.AuthorizedUser.User.FirstName,
+                SupervisorFirstname = g.AuthorizedUser.User.FirstName,
                 SupervisorSurname = g.AuthorizedUser.User.LastName,
                 SupervisorLastname = g.AuthorizedUser.User.MiddleName,
                 SupervisorEmail = g.AuthorizedUser.Email,
@@ -36,11 +36,14 @@ namespace college_events_admin_API.Controllers
                 {
                     a.EventGroup.GroupId,
                 }).Count(a => a.GroupId == g.GroupId),
+
                 categoriesCount = _db.ActualAttendances.Select(c => new
                 {
                     c.EventGroup.GroupId,
                     c.EventGroup.Event.CategoryId,
-                }).Where(c => c.GroupId == g.GroupId).GroupBy(co => co.CategoryId).Count()
+                }).Where(c => c.GroupId == g.GroupId).GroupBy(co => co.CategoryId).Count(),
+                
+                totalScore = _db.ActualAttendances.Where(c => c.EventGroup.GroupId == g.GroupId).Sum(ts => ts.TotalScore)
             })
             .OrderByDescending(g => g.GroupName);
 
