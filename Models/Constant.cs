@@ -55,5 +55,11 @@
         /// Уникальный идентификатор для роли организатора
         /// </summary>
         public const int organizerTypeId = 3;
+
+
+        /// <summary>
+        /// Уникальный идентификатор для роли модератора
+        /// </summary>
+        public const int moderatorTypeId = 4;
     }
 }
