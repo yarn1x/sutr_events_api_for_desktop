@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace college_events_admin_API.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("/college/admin/organizers")]
     public class ControllerOrganizers(SutrEventsDbContext db) : Controller

@@ -9,7 +9,23 @@
     "Parameters": [
       {
         "Name": "user",
-        "Type": "college_events_admin_API.Controllers.LoginRequest",
+        "Type": "college_events_admin_API.Models.Data_transfer_objects.LoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "college_events_admin_API.Controllers.ControllerAuthorization",
+    "Method": "Refresh",
+    "RelativePath": "college/admin/auth/refresh",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "college_events_admin_API.Models.Data_transfer_objects.RefreshRequest",
         "IsRequired": true
       }
     ],

@@ -2,9 +2,11 @@
 using college_events_admin_API.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
 
 namespace college_events_admin_API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("/college/admin/places")]
     public class ControllerLocations(SutrEventsDbContext db) : Controller

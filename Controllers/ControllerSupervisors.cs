@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace college_events_admin_API.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("/college/admin/supervisors")]
     public class ControllerSupervisors(SutrEventsDbContext db) : Controller

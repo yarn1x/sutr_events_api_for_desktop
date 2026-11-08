@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 
 namespace college_events_admin_API.Controllers
 {
-	//[Authorize]
+	[Authorize]
 	[ApiController]
 	[Route("/college/admin/events")]
 	public class ControllerEvents(SutrEventsDbContext db) : Controller

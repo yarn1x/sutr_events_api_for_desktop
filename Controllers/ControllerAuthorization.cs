@@ -1,9 +1,11 @@
 ﻿using college_events_admin_API.Models;
+using college_events_admin_API.Models.Data_transfer_objects;
 using college_events_admin_API.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System.Security.Claims;
 
 namespace college_events_admin_API.Controllers
 {
@@ -19,27 +21,74 @@ namespace college_events_admin_API.Controllers
         {
             try
             {
-                //Учётная запись должна иметь тип 1 или 4 (админ или супер-админ), логин и пароль должны совпадать с полученными данными из запроса
-                var db_response = _db.UserUsertypes.FirstOrDefault(u =>
-                    (u.UserTypeId == 1 || u.UserTypeId == 4) 
-                    && EF.Functions.Collate(u.AuthorizedUser.Login, "Latin1_General_CS_AS") == user.login 
+                var db_response = _db.UserUsertypes.Include(u => u.AuthorizedUser.User).FirstOrDefault(u =>
+                    (u.UserTypeId == 1 || u.UserTypeId == 4)
+                    && EF.Functions.Collate(u.AuthorizedUser.Login, "Latin1_General_CS_AS") == user.login
                     && EF.Functions.Collate(u.AuthorizedUser.PasswordHash, "Latin1_General_CS_AS") == user.passwordHash
                 );
 
-                //если учетка не найдена, возврат неверной авторизации
                 if (db_response == null) return Unauthorized("Invalid credentials");
-                var jwt = _service.GenerateJwtToken(user);
-                return Ok(new { Token = jwt.SerializedJwtToken, ExpiresInUTC = jwt.ExpiresIn });
+
+                var access = _service.GenerateJwtToken(user);
+                var refresh = _service.GenerateRefreshToken(user.login);
+
+                return Ok(new
+                {
+                    //НЕ МЕНЯТЬ ИМЕНА ПОЛЕЙ. ЧЕРЕВАТО НЕИЗВЕСТНЫМИ ОШИБКАМИ
+                    //Во всей системе, на стороне настольного приложения
+                    //firstname - имя
+                    //surname - фамилия
+                    //lastname - отчество
+                    FirstName = db_response.AuthorizedUser.User.FirstName,
+                    SurName = db_response.AuthorizedUser.User.LastName,
+                    LastName = db_response.AuthorizedUser.User.MiddleName,
+                    db_response.UserTypeId,
+
+                    AccessToken = access.SerializedJwtToken,
+                    RefreshToken = refresh.SerializedJwtToken,
+                    AccessTokenExpiresInUTC = access.ExpiresIn,
+                    RefreshTokenExpiresInUTC = refresh.ExpiresIn
+                });
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.ToString());
             }
         }
-    }
-    public class LoginRequest
-    {
-        public required string login { get; set; }
-        public required string passwordHash { get; set; }
+
+        [HttpPost("refresh")]
+        public IActionResult Refresh([FromBody] RefreshRequest request)
+        {
+            try
+            {
+                var principal = _service.ValidateRefreshToken(request.RefreshToken);
+                if (principal == null) return Unauthorized("Invalid refresh token");
+
+                var login = principal.FindFirst(ClaimTypes.Name)?.Value;
+                if (string.IsNullOrEmpty(login)) return Unauthorized("Invalid refresh token");
+
+                // опционально: можно перепроверить, что пользователь ещё существует/активен
+                var exists = _db.UserUsertypes.Any(u =>
+                    (u.UserTypeId == 1 || u.UserTypeId == 4)
+                    && EF.Functions.Collate(u.AuthorizedUser.Login, "Latin1_General_CS_AS") == login);
+
+                if (!exists) return Unauthorized("User not found");
+
+                var access = _service.GenerateJwtToken(new LoginRequest { login = login, passwordHash = "" });
+                var refresh = _service.GenerateRefreshToken(login);
+
+                return Ok(new AuthResponse
+                {
+                    AccessToken = access.SerializedJwtToken,
+                    RefreshToken = refresh.SerializedJwtToken,
+                    AccessTokenExpiresInUTC = access.ExpiresIn,
+                    RefreshTokenExpiresInUTC = refresh.ExpiresIn
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
+        }
     }
 }

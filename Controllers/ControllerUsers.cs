@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace college_events_admin_API.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("college/admin/users")]
     public class ControllerUsers(SutrEventsDbContext db) : Controller

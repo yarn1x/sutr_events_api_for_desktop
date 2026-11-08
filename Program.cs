@@ -1,38 +1,40 @@
 using college_events_admin_API.Models;
+using college_events_admin_API.Models.Data_transfer_objects;
 using college_events_admin_API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 //builder.WebHost.UseUrls("http://192.168.1.253:33679");
 
-
+var jwtSection = builder.Configuration.GetSection(JwtOptions.SectionName);
+builder.Services.Configure<JwtOptions>(jwtSection);
+var jwtOptions = jwtSection.Get<JwtOptions>()
+    ?? throw new InvalidOperationException("Jwt settings are missing in configuration");
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
-            //указывает, будет ли валидироваться издатель при валидации токена
-            ValidateIssuer = true, 
-            //строка, представляющая издателя
-            ValidIssuer = AuthOptions.ISSUER,
-            //будет ли валидироваться потребитель токена
+            ValidateIssuer = true,
+            ValidIssuer = jwtOptions.Issuer,
+
             ValidateAudience = true,
-            //установка потребителя токена
-            ValidAudience = AuthOptions.AUDIENCE,
-            //будет ли валидироваться время существования
+            ValidAudience = jwtOptions.Audience,
+
             ValidateLifetime = true,
-            //установка ключа безопасности
-            IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
-            //валидация ключа безопасности
+
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(jwtOptions.Secret)),
+
             ValidateIssuerSigningKey = true,
-            //определяет по умолчанию время для валидации
-            //по умолчанию выставил 0, время для валидации указано в сервисе авторизации
-            ClockSkew = TimeSpan.Zero,
+
+            ClockSkew = TimeSpan.Zero
         };
     });
 builder.Services.AddAuthorization();
