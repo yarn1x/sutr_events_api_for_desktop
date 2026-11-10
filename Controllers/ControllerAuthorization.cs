@@ -11,23 +11,34 @@ namespace college_events_admin_API.Controllers
 {
     [ApiController]
     [Route("/college/admin/auth")]
-    public class ControllerAuthorization(SutrEventsDbContext db, AuthorizationService service) : Controller
+    public class ControllerAuthorization(SutrEventsDbContext db, AuthorizationService service, HashService hashService) : Controller
     {
         private readonly SutrEventsDbContext _db = db;
         private readonly AuthorizationService _service = service;
+        private readonly HashService _hashService = hashService;
 
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginRequest user)
         {
             try
             {
-                var db_response = _db.UserUsertypes.Include(u => u.AuthorizedUser.User).FirstOrDefault(u =>
-                    (u.UserTypeId == 1 || u.UserTypeId == 4)
-                    && EF.Functions.Collate(u.AuthorizedUser.Login, "Latin1_General_CS_AS") == user.login
-                    && EF.Functions.Collate(u.AuthorizedUser.PasswordHash, "Latin1_General_CS_AS") == user.passwordHash
-                );
+                var db_response = _db.UserUsertypes
+                    .Include(u => u.AuthorizedUser.User)
+                    .FirstOrDefault(u =>
+                        (u.UserTypeId == 1 || u.UserTypeId == 4)
+                        && EF.Functions.Collate(u.AuthorizedUser.Login, "Latin1_General_CS_AS") == user.login
+                    );
 
-                if (db_response == null) return Unauthorized("Invalid credentials");
+                if (db_response == null)
+                {
+                    return Unauthorized(new { message = "Неверный логин или пароль" });
+                }
+
+
+                if (!_hashService.VerifyPassword(user.password, db_response.AuthorizedUser.PasswordHash))
+                {
+                    return Unauthorized(new { message = "Неверный логин или пароль" });
+                }
 
                 var access = _service.GenerateJwtToken(user);
                 var refresh = _service.GenerateRefreshToken(user.login);
@@ -74,7 +85,7 @@ namespace college_events_admin_API.Controllers
 
                 if (!exists) return Unauthorized("User not found");
 
-                var access = _service.GenerateJwtToken(new LoginRequest { login = login, passwordHash = "" });
+                var access = _service.GenerateJwtToken(new LoginRequest { login = login, password = "" });
                 var refresh = _service.GenerateRefreshToken(login);
 
                 return Ok(new AuthResponse

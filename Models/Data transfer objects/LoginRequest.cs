@@ -3,6 +3,6 @@
     public class LoginRequest
     {
         public required string login { get; set; }
-        public required string passwordHash { get; set; }
+        public required string password { get; set; }
     }
 }

@@ -411,3 +411,4 @@ C:\Desktop\Prog\СИстемный прогер\college_events_admin_API_copy\ob
 C:\Desktop\Prog\СИстемный прогер\college_events_admin_API_copy\obj\Debug\net8.0\college_events_admin_API.genruntimeconfig.cache
 C:\Desktop\Prog\СИстемный прогер\college_events_admin_API_copy\obj\Debug\net8.0\ref\college_events_admin_API.dll
 C:\Desktop\Prog\СИстемный прогер\college_events_admin_API\obj\Debug\net8.0\college_events_admin_API.sourcelink.json
+C:\Desktop\Prog\СИстемный прогер\college_events_admin_API\bin\Debug\net8.0\BCrypt-Net-Next.dll

@@ -45,6 +45,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddSingleton<HashService>();
+
 builder.Services.AddScoped<EventsService>();
 builder.Services.AddScoped<OrganizerService>();
 builder.Services.AddScoped<SupervisorService>();
